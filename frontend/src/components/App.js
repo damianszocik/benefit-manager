@@ -1,14 +1,20 @@
 import React from 'react';
+import { StylesProvider, ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components';
+import appTheme from '../appTheme';
+import GlobalStyle from './styles/Global';
 import Login from 'pages/Login';
-import { ThemeProvider } from 'styled-components';
-import { createMuiTheme } from '@material-ui/core/styles';
-
-const defaultMUITheme = createMuiTheme();
+import Layout from './Layout/Layout';
 
 const App = () => (
-  <ThemeProvider theme={defaultMUITheme}>
-    <Login />
-  </ThemeProvider>
+  <StylesProvider injectFirst>
+    <ThemeProvider theme={appTheme}>
+      <StyledComponentsThemeProvider theme={appTheme}>
+        <GlobalStyle />
+        <Layout />
+      </StyledComponentsThemeProvider>
+    </ThemeProvider>
+  </StylesProvider>
 );
 
 export default App;
