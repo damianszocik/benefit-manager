@@ -21,9 +21,21 @@ const appTheme = createMuiTheme({
 
 // Override mui components styles after creating theme to use theme properties
 // AppBar
-appTheme.overrides.MuiAppBar = {
-	colorPrimary: { backgroundColor: appTheme.palette.common.white },
-	root: { borderBottom: `3px solid ${appTheme.palette.grey[100]}` }
+appTheme.overrides = {
+	MuiAppBar: {
+		colorPrimary: { backgroundColor: appTheme.palette.common.white },
+		root: { borderBottom: `3px solid ${appTheme.palette.grey[100]}`, zIndex: appTheme.zIndex.modal + 1 }
+	},
+	MuiDrawer: {
+		paper: {
+			padding: appTheme.spacing(9, 2, 4, 2),
+			boxSizing: 'border-box',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+			maxWidth: '250px'
+		}
+	},
+	MuiBackdrop: { root: { backgroundColor: 'rgba(255, 255, 255, .5)' } }
 };
 
 export default appTheme;
