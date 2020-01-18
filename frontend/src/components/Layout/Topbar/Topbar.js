@@ -6,28 +6,6 @@ import HelpSection from 'components/shared/HelpSection/HelpSection';
 import UserInfoSection from 'components/shared/UserInfoSection/UserInfoSection';
 import MenuButton from './MenuButton';
 
-const Topbar = () => {
-	const { mobileView, drawerVisibility, toggleDrawerVisibility, userName } = useContext(SystemContext);
-	return (
-		<AppBar elevation={0} position="fixed">
-			<Toolbar>
-				<TopbarContainer maxWidth="xl">
-					{mobileView && (
-						<MenuButton mobileDrawerVisibility={drawerVisibility} mobileDrawerToggleHandler={toggleDrawerVisibility} />
-					)}
-					<Logo>benefit market</Logo>
-					{!mobileView && (
-						<>
-							<HelpSection />
-							{userName && <UserInfoSection userName={userName} />}
-						</>
-					)}
-				</TopbarContainer>
-			</Toolbar>
-		</AppBar>
-	);
-};
-
 const TopbarContainer = styled(Container)`
 	display: flex;
 	align-items: center;
@@ -49,5 +27,27 @@ export const Logo = styled.h1`
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 `;
+
+const Topbar = () => {
+	const { mobileView, drawerVisibility, toggleDrawerVisibility, userName } = useContext(SystemContext);
+	return (
+		<AppBar elevation={0} position="fixed">
+			<Toolbar>
+				<TopbarContainer maxWidth="xl">
+					{mobileView && (
+						<MenuButton mobileDrawerVisibility={drawerVisibility} mobileDrawerToggleHandler={toggleDrawerVisibility} />
+					)}
+					<Logo>benefit market</Logo>
+					{!mobileView && (
+						<>
+							<HelpSection />
+							{userName && <UserInfoSection userName={userName} />}
+						</>
+					)}
+				</TopbarContainer>
+			</Toolbar>
+		</AppBar>
+	);
+};
 
 export default Topbar;

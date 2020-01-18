@@ -28,7 +28,7 @@ appTheme.overrides = {
 	},
 	MuiDrawer: {
 		paper: {
-			padding: appTheme.spacing(9, 2, 4, 2),
+			padding: appTheme.spacing(10, 2, 4, 2),
 			boxSizing: 'border-box',
 			justifyContent: 'space-between',
 			alignItems: 'center',

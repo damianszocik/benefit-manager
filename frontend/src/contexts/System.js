@@ -7,6 +7,7 @@ SystemContext.displayName = 'SystemContext';
 
 const SystemContextProvider = ({ children }) => {
 	const [userName, setUserName] = useState();
+	const [currentStep, setCurrentStep] = useState(0);
 	const [mobileView, setMobileView] = useState(false);
 	const [drawerVisibility, setDrawerVisibility] = useState(false);
 	const toggleDrawerVisibility = visibility => event => {
@@ -32,7 +33,8 @@ const SystemContextProvider = ({ children }) => {
 		};
 	});
 	return (
-		<SystemContext.Provider value={{ userName, setUserName, drawerVisibility, toggleDrawerVisibility, mobileView, setMobileView }}>
+		<SystemContext.Provider
+			value={{ userName, setUserName, drawerVisibility, toggleDrawerVisibility, mobileView, setMobileView, currentStep, setCurrentStep }}>
 			{children}
 		</SystemContext.Provider>
 	);
