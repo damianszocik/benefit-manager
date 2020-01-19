@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Toolbar, AppBar, Container } from '@material-ui/core';
 import { SystemContext } from 'contexts/System';
-import HelpSection from 'components/shared/HelpSection/HelpSection';
-import UserInfoSection from 'components/shared/UserInfoSection/UserInfoSection';
+import HelpSection from '../HelpSection/HelpSection';
+import UserInfoSection from '../UserInfoSection/UserInfoSection';
 import MenuButton from './MenuButton';
 
 const TopbarContainer = styled(Container)`

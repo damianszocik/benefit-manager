@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { SwipeableDrawer } from '@material-ui/core';
 import { SystemContext } from 'contexts/System';
-import UserInfoSection from 'components/shared/UserInfoSection/UserInfoSection';
-import ProgressStepper from 'components/shared/ProgressStepper/ProgressStepper';
-import HelpSection from 'components/shared/HelpSection/HelpSection';
+import UserInfoSection from '../UserInfoSection/UserInfoSection';
+import ProgressStepper from '../ProgressStepper/ProgressStepper';
+import HelpSection from '../HelpSection/HelpSection';
 
 const MobileDrawer = () => {
 	const { drawerVisibility, toggleDrawerVisibility, userName, currentStep } = useContext(SystemContext);

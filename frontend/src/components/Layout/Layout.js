@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { SystemContext } from 'contexts/System';
 import Topbar from './Topbar/Topbar';
-import ProgressStepper from 'components/shared/ProgressStepper/ProgressStepper';
+import ProgressStepper from './ProgressStepper/ProgressStepper';
 import MobileDrawer from './MobileDrawer/MobileDrawer';
 
 const Main = styled.main`
-	margin-top: ${({ theme }) => theme.spacing(8)}px;
+	padding: ${({ theme }) => theme.spacing(11, 3, 3, 3)};
 `;
 
 const Article = styled.article`
@@ -17,7 +17,9 @@ const Section = styled.section`
 	flex-grow: 1;
 	flex-basis: 100%;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
 `;
 
 const DesktopStepperWrapper = styled.aside`
