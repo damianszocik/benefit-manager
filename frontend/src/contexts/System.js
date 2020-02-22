@@ -9,7 +9,9 @@ const SystemContextProvider = ({ children }) => {
 	const [userName, setUserName] = useState();
 	const [currentStep, setCurrentStep] = useState(0);
 	const [mobileView, setMobileView] = useState(false);
+	const [loading, toggleLoading] = useState(false);
 	const [drawerVisibility, setDrawerVisibility] = useState(false);
+
 	const toggleDrawerVisibility = visibility => event => {
 		if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
 			return;
@@ -34,7 +36,18 @@ const SystemContextProvider = ({ children }) => {
 	});
 	return (
 		<SystemContext.Provider
-			value={{ userName, setUserName, drawerVisibility, toggleDrawerVisibility, mobileView, setMobileView, currentStep, setCurrentStep }}>
+			value={{
+				userName,
+				setUserName,
+				drawerVisibility,
+				toggleDrawerVisibility,
+				mobileView,
+				setMobileView,
+				currentStep,
+				setCurrentStep,
+				toggleLoading,
+				loading
+			}}>
 			{children}
 		</SystemContext.Provider>
 	);

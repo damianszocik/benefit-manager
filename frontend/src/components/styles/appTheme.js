@@ -45,7 +45,8 @@ appTheme.overrides = {
 	},
 	MuiBackdrop: { root: { backgroundColor: 'rgba(255, 255, 255, .5)' } },
 	MuiButton: {
-		root: { padding: appTheme.spacing(1.5, 4) }
+		root: { padding: appTheme.spacing(1.5, 4) },
+		outlined: { padding: appTheme.spacing(1.5, 4) }
 	},
 	MuiTypography: {
 		h5: { color: appTheme.palette.grey[500] },
