@@ -7,6 +7,14 @@ const appTheme = createMuiTheme({
 		}
 	},
 	typography: {
+		h4: {
+			fontSize: '2.25rem',
+			fontWeight: 300
+		},
+		body1: {
+			fontSize: '1.125rem',
+			fontWeight: 300
+		},
 		subtitle1: {
 			fontSize: '.875rem',
 			fontWeight: '400'
@@ -28,14 +36,23 @@ appTheme.overrides = {
 	},
 	MuiDrawer: {
 		paper: {
-			padding: appTheme.spacing(9, 2, 4, 2),
+			padding: appTheme.spacing(10, 2, 4, 2),
 			boxSizing: 'border-box',
 			justifyContent: 'space-between',
 			alignItems: 'center',
 			maxWidth: '250px'
 		}
 	},
-	MuiBackdrop: { root: { backgroundColor: 'rgba(255, 255, 255, .5)' } }
+	MuiBackdrop: { root: { backgroundColor: 'rgba(255, 255, 255, .5)' } },
+	MuiButton: {
+		root: { padding: appTheme.spacing(1.5, 4) },
+		outlined: { padding: appTheme.spacing(1.5, 4) }
+	},
+	MuiTypography: {
+		h5: { color: appTheme.palette.grey[500] },
+		colorTextPrimary: { color: appTheme.palette.grey[800] },
+		colorTextSecondary: { color: appTheme.palette.grey[600] }
+	}
 };
 
 export default appTheme;
