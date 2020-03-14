@@ -29,7 +29,7 @@ export const Logo = styled.h1`
 `;
 
 const Topbar = () => {
-	const { mobileView, drawerVisibility, toggleDrawerVisibility, userName } = useContext(SystemContext);
+	const { mobileView, drawerVisibility, toggleDrawerVisibility, user } = useContext(SystemContext);
 	return (
 		<AppBar elevation={0} position="fixed">
 			<Toolbar>
@@ -41,7 +41,7 @@ const Topbar = () => {
 					{!mobileView && (
 						<>
 							<HelpSection />
-							{userName && <UserInfoSection userName={userName} />}
+							{user.username && <UserInfoSection userName={user.username} />}
 						</>
 					)}
 				</TopbarContainer>

@@ -1,12 +1,14 @@
 import React, { useState, useEffect, createContext } from 'react';
 import isMobile from 'ismobilejs';
+import axios from 'axios';
 import { MOBILE_BREAKPOINT } from 'constants/system';
+import { getStoredItem, setStoredItem } from 'utils/localStorage';
 
 export const SystemContext = createContext();
 SystemContext.displayName = 'SystemContext';
 
 const SystemContextProvider = ({ children }) => {
-	const [userName, setUserName] = useState();
+	const [user, setUser] = useState(getStoredItem('user') || {});
 	const [currentStep, setCurrentStep] = useState(0);
 	const [mobileView, setMobileView] = useState(false);
 	const [loading, toggleLoading] = useState(false);
@@ -34,11 +36,20 @@ const SystemContextProvider = ({ children }) => {
 			window.removeEventListener('resize', windowResizeObserver);
 		};
 	});
+	// preservig values to local storage
+	useEffect(() => {
+		if (user.jwt) {
+			axios.defaults.headers.common['Authorization'] = `Bearer ${user.jwt}`;
+		} else {
+			delete axios.defaults.headers.common['Authorization'];
+		}
+		setStoredItem('user', user);
+	}, [user]);
 	return (
 		<SystemContext.Provider
 			value={{
-				userName,
-				setUserName,
+				user,
+				setUser,
 				drawerVisibility,
 				toggleDrawerVisibility,
 				mobileView,
