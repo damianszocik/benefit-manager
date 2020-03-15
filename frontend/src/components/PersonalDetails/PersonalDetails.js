@@ -13,7 +13,7 @@ const InputsContainer = styled(Grid)`
 	margin-bottom: 0;
 `;
 
-const SignUp = props => {
+const PersonalDetials = () => {
 	return (
 		<>
 			<SystemStyledTypography variant="h5" component="h2" my={2}>
@@ -53,4 +53,4 @@ const SignUp = props => {
 	);
 };
 
-export default SignUp;
+export default PersonalDetials;
