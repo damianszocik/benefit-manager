@@ -100,6 +100,7 @@ const SignUp = props => {
 	};
 
 	const forgotPasswordHandler = async () => {
+		toggleLoading(true);
 		try {
 			const {
 				data: { ok: emailSent }
@@ -113,6 +114,7 @@ const SignUp = props => {
 		} catch (error) {
 			toggleToast(true, parseResponseError(error), 'error');
 		}
+		toggleLoading(false);
 	};
 	return (
 		<>

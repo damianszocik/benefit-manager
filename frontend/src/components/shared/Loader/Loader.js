@@ -10,7 +10,8 @@ const LoaderContainer = styled.div`
     width: 100%
     top: 0;
     left: 0;
-    background: rgba(255, 255, 255, .8);
+	background: rgba(255, 255, 255, .8);
+	z-index: ${props => props.theme.zIndex.modal + 1};
 `;
 
 const Loader = ({ show = false }) => {
