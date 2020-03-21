@@ -1244,6 +1244,48 @@
                 }
               }
             }
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "pesel": {
+            "type": "string"
+          },
+          "benefits": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "points"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "points": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "avilablePoints": {
+            "type": "integer",
+            "default": 10
           }
         }
       },
@@ -1281,6 +1323,25 @@
           },
           "role": {
             "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surname": {
+            "type": "string"
+          },
+          "pesel": {
+            "type": "string"
+          },
+          "benefits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "avilablePoints": {
+            "type": "integer",
+            "default": 10
           }
         }
       }

@@ -6,7 +6,6 @@ import { Typography, Button, Box, Grid, TextField } from '@material-ui/core';
 import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
 import { spacing } from '@material-ui/system';
 import { SystemContext } from 'contexts/System';
-import Toast, { useToast } from 'components/shared/Toast/Toast';
 import { RESET_PASSWORD } from 'constants/apiEndpoints';
 import parseResponseError from 'utils/parseResponseError';
 
@@ -20,9 +19,12 @@ const InputsContainer = styled(Grid)`
 `;
 
 const ResetPassword = () => {
-	const { toastProperties, toggleToast } = useToast();
 	const browserHistory = useHistory();
-	const { setCurrentStep, setUser } = useContext(SystemContext);
+	const {
+		setCurrentStep,
+		setUser,
+		globalToast: { toggleToast }
+	} = useContext(SystemContext);
 	const query = new URLSearchParams(useLocation().search);
 	const submitHandler = async event => {
 		event.preventDefault();
@@ -56,7 +58,7 @@ const ResetPassword = () => {
 				toggleToast(true, 'Your account is not confirmed. Check your inbox for the message with an activation link.', 'warning');
 			} else {
 				setCurrentStep(1);
-				setUser(prevUserData => ({ ...prevUserData, ...user, jwt }));
+				setUser({ ...user, jwt });
 				browserHistory.push({
 					pathname: '/',
 					state: { toast: { message: 'Your password have been changed. You have been logged in.', type: 'success' } }
@@ -89,12 +91,6 @@ const ResetPassword = () => {
 					</Button>
 				</Box>
 			</Box>
-			<Toast
-				visibility={toastProperties.visibility}
-				message={toastProperties.message}
-				type={toastProperties.type}
-				closeHandler={() => toggleToast(false)}
-			/>
 		</>
 	);
 };

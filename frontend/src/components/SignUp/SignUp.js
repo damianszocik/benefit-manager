@@ -6,7 +6,6 @@ import { animated, config, useTransition } from 'react-spring';
 import { Typography, Button, Box, Grid, TextField, Link } from '@material-ui/core';
 import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
 import { spacing } from '@material-ui/system';
-import Toast, { useToast } from 'components/shared/Toast/Toast';
 import Modal, { useModal } from 'components/shared/Modal/Modal';
 import FormTypeToggle from './FormTypeToggle';
 import PasswordForgot from './PasswordForgot';
@@ -24,8 +23,12 @@ const InputsContainer = styled(Grid)`
 const AnimatedGrid = animated(Grid);
 
 const SignUp = props => {
-	const { toggleLoading, setUser, setCurrentStep } = useContext(SystemContext);
-	const { toastProperties, toggleToast } = useToast();
+	const {
+		toggleLoading,
+		setUser,
+		setCurrentStep,
+		globalToast: { toggleToast }
+	} = useContext(SystemContext);
 	const { modalState, toggleModal } = useModal();
 	const [forgottenEmail, setForgottenEmail] = useState('xxxd');
 	const formTypes = { LOGIN: 'Login', SIGN_UP: 'Sign up' };
@@ -90,7 +93,7 @@ const SignUp = props => {
 					);
 				} else {
 					setCurrentStep(1);
-					setUser(prevUserData => ({ ...prevUserData, ...responseUser, jwt }));
+					setUser({ ...responseUser, jwt });
 				}
 			}
 		} catch (error) {
@@ -159,12 +162,6 @@ const SignUp = props => {
 				content={modalState.content}
 				buttonLeft={modalState.buttonLeft}
 				buttonRight={{ text: 'Reset password', action: forgotPasswordHandler }}
-			/>
-			<Toast
-				visibility={toastProperties.visibility}
-				message={toastProperties.message}
-				type={toastProperties.type}
-				closeHandler={() => toggleToast(false)}
 			/>
 		</>
 	);

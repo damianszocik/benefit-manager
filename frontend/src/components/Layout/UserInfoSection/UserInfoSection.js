@@ -4,15 +4,19 @@ import styled from 'styled-components';
 import { Typography, IconButton } from '@material-ui/core';
 import { ExitToApp as LogoutIcon } from '@material-ui/icons';
 
-const UserInfoSection = ({ userName }) => {
+const UserInfoSection = ({ user }) => {
 	const { setUser, setCurrentStep } = useContext(SystemContext);
 	const logoutHandler = () => {
 		setUser({});
 		setCurrentStep(0);
 	};
+	const getUserName = (user = {}) => {
+		const { name, surname, username } = user;
+		return name && surname ? `${name} ${surname}` : username;
+	};
 	return (
 		<UserInfoStyles>
-			<Typography noWrap>{userName}</Typography>
+			<Typography noWrap>{getUserName(user)}</Typography>
 			<IconButton edge="end" aria-label="logout" onClick={logoutHandler}>
 				<LogoutIcon />
 			</IconButton>

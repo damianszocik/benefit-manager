@@ -9,7 +9,7 @@ const MobileDrawer = () => {
 	const { drawerVisibility, toggleDrawerVisibility, user, currentStep } = useContext(SystemContext);
 	return (
 		<SwipeableDrawer open={drawerVisibility} onClose={toggleDrawerVisibility(false)} onOpen={toggleDrawerVisibility(true)}>
-			{user.username && <UserInfoSection userName={user.username} />}
+			{user.username && <UserInfoSection user={user} />}
 			<ProgressStepper step={currentStep} small />
 			<HelpSection />
 		</SwipeableDrawer>

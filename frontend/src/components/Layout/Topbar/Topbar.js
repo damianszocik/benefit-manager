@@ -41,7 +41,7 @@ const Topbar = () => {
 					{!mobileView && (
 						<>
 							<HelpSection />
-							{user.username && <UserInfoSection userName={user.username} />}
+							{user?.username && <UserInfoSection user={user} />}
 						</>
 					)}
 				</TopbarContainer>

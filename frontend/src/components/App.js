@@ -19,8 +19,15 @@ const checkConfirmedUser = () => {
 };
 
 const App = () => {
-	const { user, setUser, currentStep, setCurrentStep, toggleLoading, mobileView } = useContext(SystemContext);
-	const { toastProperties, toggleToast } = useToast();
+	const {
+		user,
+		setUser,
+		currentStep,
+		setCurrentStep,
+		toggleLoading,
+		mobileView,
+		globalToast: { toastProperties, toggleToast }
+	} = useContext(SystemContext);
 	const { location, replace: replaceHistory } = useHistory();
 	const renderStepComponent = currentStep => {
 		switch (currentStep) {
@@ -46,8 +53,7 @@ const App = () => {
 				toggleToast(true, 'Your account is not confirmed. Check your inbox for the message with an activation link.', 'warning');
 				throw new Error();
 			}
-			setUser(prevUserData => ({ ...prevUserData, userData }));
-			setCurrentStep(1);
+			setUser({ ...userData });
 		} catch (error) {
 			setUser({});
 			setCurrentStep(0);
