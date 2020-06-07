@@ -1,0 +1,30 @@
+{
+  "connection": "default",
+  "collectionName": "benefits",
+  "info": {
+    "name": "Benefit"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "users": {
+      "via": "benefits",
+      "plugin": "users-permissions",
+      "collection": "user"
+    },
+    "points": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "max": 19
+    }
+  }
+}

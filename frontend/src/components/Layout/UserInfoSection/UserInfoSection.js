@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { SystemContext } from 'contexts/System';
 import styled from 'styled-components';
 import { Typography, IconButton } from '@material-ui/core';
 import { ExitToApp as LogoutIcon } from '@material-ui/icons';
 
-const UserInfoSection = ({ userName }) => (
-	<UserInfoStyles>
-		<Typography noWrap>{userName}</Typography>
-		<IconButton edge="end" aria-label="logout">
-			<LogoutIcon />
-		</IconButton>
-	</UserInfoStyles>
-);
+const UserInfoSection = ({ user }) => {
+	const { setUser, setCurrentStep } = useContext(SystemContext);
+	const logoutHandler = () => {
+		setUser({});
+		setCurrentStep(0);
+	};
+	const getUserName = (user = {}) => {
+		const { name, surname, username } = user;
+		return name && surname ? `${name} ${surname}` : username;
+	};
+	return (
+		<UserInfoStyles>
+			<Typography noWrap>{getUserName(user)}</Typography>
+			<IconButton edge="end" aria-label="logout" onClick={logoutHandler}>
+				<LogoutIcon />
+			</IconButton>
+		</UserInfoStyles>
+	);
+};
 
 const UserInfoStyles = styled.div`
 	display: flex;

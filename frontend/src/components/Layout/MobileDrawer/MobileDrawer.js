@@ -6,10 +6,10 @@ import ProgressStepper from '../ProgressStepper/ProgressStepper';
 import HelpSection from '../HelpSection/HelpSection';
 
 const MobileDrawer = () => {
-	const { drawerVisibility, toggleDrawerVisibility, userName, currentStep } = useContext(SystemContext);
+	const { drawerVisibility, toggleDrawerVisibility, user, currentStep } = useContext(SystemContext);
 	return (
 		<SwipeableDrawer open={drawerVisibility} onClose={toggleDrawerVisibility(false)} onOpen={toggleDrawerVisibility(true)}>
-			{userName && <UserInfoSection userName={userName} />}
+			{user.username && <UserInfoSection user={user} />}
 			<ProgressStepper step={currentStep} small />
 			<HelpSection />
 		</SwipeableDrawer>

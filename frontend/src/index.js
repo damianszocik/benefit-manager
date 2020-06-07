@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { StylesProvider, ThemeProvider } from '@material-ui/styles';
 import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components';
 import SystemContextProvider from 'contexts/System';
@@ -14,7 +15,9 @@ const RootComponent = () => (
 			<StyledComponentsThemeProvider theme={appTheme}>
 				<SystemContextProvider>
 					<GlobalStyle />
-					<App />
+					<Router>
+						<App />
+					</Router>
 				</SystemContextProvider>
 			</StyledComponentsThemeProvider>
 		</ThemeProvider>
