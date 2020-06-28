@@ -8,10 +8,16 @@ const animationOptions = {
 	animationData: AnimatedMenuArrowIcon,
 	loop: false,
 	rendererSettings: {
-		preserveAspectRatio: 'xMidYMid meet'
-	}
+		preserveAspectRatio: 'xMidYMid meet',
+	},
 };
-const MenuButton = ({ mobileDrawerVisibility, mobileDrawerToggleHandler }) => {
+
+interface MenuButtonProps {
+	mobileDrawerVisibility: boolean;
+	mobileDrawerToggleHandler: (visibilty: boolean) => any;
+}
+
+const MenuButton: React.FC<MenuButtonProps> = ({ mobileDrawerVisibility, mobileDrawerToggleHandler }) => {
 	const toArrowSergments = [5, 14],
 		toBurgerSegments = [19, 28];
 	return (
@@ -23,7 +29,7 @@ const MenuButton = ({ mobileDrawerVisibility, mobileDrawerToggleHandler }) => {
 
 const StyledIconButton = styled(IconButton)`
 	position: absolute;
-	left: ${props => props.theme.spacing(3)}px;
+	left: ${(props) => props.theme.spacing(3)}px;
 	max-width: 50px;
 	max-height: 50px;
 `;
