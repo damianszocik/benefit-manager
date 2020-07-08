@@ -22,14 +22,14 @@ const generateMap = () => {
 	return map;
 };
 
-const TextMaskCustom = props => {
+const TextMaskCustom = (props) => {
 	const [inputMap] = React.useState(generateMap());
 	const { inputRef, ...other } = props;
 
 	return (
 		<MaskedInput
 			{...other}
-			ref={ref => {
+			ref={(ref) => {
 				inputRef(ref ? ref.inputElement : null);
 			}}
 			mask={inputMap}
@@ -39,7 +39,7 @@ const TextMaskCustom = props => {
 	);
 };
 
-const PeselInput = ({}) => {
+const PeselInput = () => {
 	return (
 		<FormControl fullWidth>
 			<InputLabel htmlFor="pesel">PESEL</InputLabel>
