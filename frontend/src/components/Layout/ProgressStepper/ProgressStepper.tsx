@@ -5,7 +5,7 @@ import { EmojiPeople as PeopleIcon, Fingerprint as FingerprintIcon, CardGiftcard
 
 interface ProgressStepperProps {
 	step: number;
-	small: boolean;
+	small?: boolean;
 }
 
 interface StyledStepIconProps extends ProgressStepperProps {
@@ -24,7 +24,7 @@ const StyledStepper = styled(Stepper)`
 	}
 `;
 
-const StepConnector = styled.div<{ small: boolean }>`
+const StepConnector = styled.div<{ small?: boolean }>`
 	height: ${({ theme, small }) => (small ? theme.spacing(6) : theme.spacing(12))}px;
 	width: 3px;
 	background: ${({ theme }) => theme.palette.primary.main};

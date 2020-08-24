@@ -1,17 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useSpring, animated, interpolate, config } from 'react-spring';
-import { spacing, palette } from '@material-ui/system';
-
-const SystemStyledTypography = styled(Typography)`
-    ${spacing}${palette};
-    cursor: ${({ notClickable }) => (notClickable ? 'default' : 'pointer')}
-`;
+import { SystemStyledTypography } from 'components/shared/SystemStyledTypography/SystemStyledTypography';
 
 const AnimatedTypography = animated(SystemStyledTypography);
 
-const FormTypeToggle = ({ activeType, toggleHandler, types }) => {
+interface FormTypeToggleProps {
+	activeType: string;
+	toggleHandler: (typeToActivate: string) => void;
+	types: {
+		[typeName: string]: string;
+	};
+}
+
+const FormTypeToggle: React.FC<FormTypeToggleProps> = ({ activeType, toggleHandler, types }) => {
 	const toggleValues = Object.values(types);
 	const { scale1, scale2, opacity1, opacity2, marginLeft, x } = useSpring({
 		from: { scale1: 1, scale2: 1, marginLeft: 0, opacity1: 1, opacity2: 1, x: 0 },
@@ -21,7 +23,7 @@ const FormTypeToggle = ({ activeType, toggleHandler, types }) => {
 		opacity1: activeType === toggleValues[0] ? 1 : 0.5,
 		opacity2: activeType === toggleValues[1] ? 1 : 0.5,
 		x: activeType === toggleValues[0] ? 0 : 30,
-		config: config.wobbly
+		config: config.wobbly,
 	});
 	return (
 		<Box display="flex" alignItems="center">
@@ -31,7 +33,7 @@ const FormTypeToggle = ({ activeType, toggleHandler, types }) => {
 				style={{
 					transform: interpolate([scale1, x], (scale1, x) => `scale(${scale1}) translateX(${x}px) `),
 					opacity: opacity1,
-					marginLeft
+					marginLeft,
 				}}
 				my={2}
 				onClick={() => toggleHandler(toggleValues[0])}>

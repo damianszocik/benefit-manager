@@ -4,17 +4,22 @@ import parseResponseError from 'utils/parseResponseError';
 import axios from 'axios';
 import { BENEFITS } from 'constants/apiEndpoints';
 
-const BenefitsSelection = () => {
+interface Benefit {
+	id: string;
+	name: string;
+}
+
+const BenefitsSelection: React.FC<{}> = () => {
 	const {
 		toggleLoading,
-		globalToast: { toggleToast }
+		globalToast: { toggleToast },
 	} = useContext(SystemContext);
-	const [availableBenefits, setAvailableBenefits] = useState([]);
+	const [availableBenefits, setAvailableBenefits] = useState<Benefit[]>([]);
 	const getBenefits = async () => {
 		toggleLoading(true);
 		try {
 			const { data: fetchedBenefits } = await axios.get(BENEFITS);
-			setAvailableBenefits([...fetchedBenefits]);
+			setAvailableBenefits(fetchedBenefits);
 		} catch (error) {
 			toggleToast(true, parseResponseError(error), 'error');
 		}
@@ -23,13 +28,7 @@ const BenefitsSelection = () => {
 	useEffect(() => {
 		getBenefits();
 	}, []);
-	return (
-		<div>
-			{availableBenefits.map(benefit => (
-				<div key={benefit.id}>{benefit.name}</div>
-			))}
-		</div>
-	);
+	return <div>{availableBenefits.length && availableBenefits.map((benefit) => <div key={benefit.id}>{benefit.name}</div>)}</div>;
 };
 
 export default BenefitsSelection;

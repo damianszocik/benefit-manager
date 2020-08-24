@@ -3,7 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { CURRENT_USER } from 'constants/apiEndpoints';
 import { SystemContext } from 'contexts/System';
-import Toast, { useToast } from 'components/shared/Toast/Toast';
+import Toast from 'components/shared/Toast/Toast';
 import Layout from './Layout/Layout';
 import SignUp from './SignUp/SignUp';
 import PersonalDetails from './PersonalDetails/PersonalDetails';
@@ -26,10 +26,10 @@ const App = () => {
 		setCurrentStep,
 		toggleLoading,
 		mobileView,
-		globalToast: { toastProperties, toggleToast }
+		globalToast: { toastProperties, toggleToast },
 	} = useContext(SystemContext);
 	const { location, replace: replaceHistory } = useHistory();
-	const renderStepComponent = currentStep => {
+	const renderStepComponent = (currentStep) => {
 		switch (currentStep) {
 			case 1:
 				return <PersonalDetails />;
@@ -41,7 +41,7 @@ const App = () => {
 				return <SignUp />;
 		}
 	};
-	const updateUser = async jwt => {
+	const updateUser = async (jwt) => {
 		toggleLoading(true);
 		axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 		try {

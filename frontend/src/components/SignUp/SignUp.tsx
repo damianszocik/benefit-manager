@@ -1,22 +1,16 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import { SystemContext } from 'contexts/System';
 import { animated, config, useTransition } from 'react-spring';
-import { Typography, Button, Box, Grid, TextField, Link } from '@material-ui/core';
+import { Button, Box, Grid, TextField, Link } from '@material-ui/core';
 import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
-import { spacing } from '@material-ui/system';
 import Modal, { useModal } from 'components/shared/Modal/Modal';
 import FormTypeToggle from './FormTypeToggle';
 import PasswordForgot from './PasswordForgot';
 import parseResponseError from 'utils/parseResponseError';
 import { REGISTER_USER, LOGIN, FORGOT_PASSWORD } from 'constants/apiEndpoints';
-import { BoxProps } from '@material-ui/core/Box';
-import { TypographyProps } from '@material-ui/core/Typography';
+import { SystemStyledTypography } from 'components/shared/SystemStyledTypography/SystemStyledTypography';
 
-const SystemStyledTypography = styled(Typography)<TypographyProps & BoxProps>`
-	${spacing}
-`;
 const AnimatedGrid = animated(Grid);
 
 const SignUp: React.FC<{}> = () => {
@@ -74,9 +68,6 @@ const SignUp: React.FC<{}> = () => {
 			toggleLoading(true);
 			const response = await axios.post(requestUrl, requestPayload);
 			const { jwt, user: responseUser } = response.data;
-			if (!jwt) {
-				throw new Error();
-			}
 			if (formType === formTypes.SIGN_UP) {
 				toggleToast(
 					true,
@@ -84,7 +75,7 @@ const SignUp: React.FC<{}> = () => {
 					'success'
 				);
 			} else {
-				if (responseUser.blocked) {
+				if (!jwt || responseUser.blocked) {
 					throw new Error();
 				}
 				if (!responseUser.confirmed) {

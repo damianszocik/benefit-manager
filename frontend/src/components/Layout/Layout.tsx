@@ -6,6 +6,10 @@ import ProgressStepper from './ProgressStepper/ProgressStepper';
 import MobileDrawer from './MobileDrawer/MobileDrawer';
 import Loader from 'components/shared/Loader/Loader';
 
+interface LayoutProps {
+	mobile: boolean;
+}
+
 const Main = styled.main`
 	padding: ${({ theme }) => theme.spacing(11, 3, 3, 3)};
 `;
@@ -16,7 +20,7 @@ const Article = styled.article`
 	position: relative;
 `;
 
-const Section = styled.section`
+const Section = styled.section<LayoutProps>`
 	flex-grow: 1;
 	flex-basis: 100%;
 	display: flex;
@@ -32,7 +36,7 @@ const DesktopStepperWrapper = styled.aside`
 	margin-right: ${({ theme }) => theme.spacing(3)}px;
 `;
 
-const Layout = ({ mobile, children }) => {
+const Layout: React.FC<LayoutProps> = ({ mobile, children }) => {
 	const { currentStep, loading } = useContext(SystemContext);
 	return (
 		<Main>

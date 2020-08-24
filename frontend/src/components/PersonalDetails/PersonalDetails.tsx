@@ -1,33 +1,29 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
-import { Typography, Button, Box, Grid, TextField } from '@material-ui/core';
-import { ArrowForward as ArrowForwardIcon, ArrowBack as ArrowBackIcon } from '@material-ui/icons';
-import { spacing } from '@material-ui/system';
+import { Button, Box, Grid, TextField } from '@material-ui/core';
+import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
+import { SystemStyledTypography } from 'components/shared/SystemStyledTypography/SystemStyledTypography';
 import { SystemContext } from 'contexts/System';
 import PeselInput from './PeselInput';
 import { UPDATE_USER } from 'constants/apiEndpoints';
 
-const SystemStyledTypography = styled(Typography)`
-	${spacing}
-`;
+const validatePesel = (pesel: string) => pesel.split('').filter((char) => !isNaN(+char)).length === 3;
 
-const InputsContainer = styled(Grid)`
-	margin-top: 0;
-	margin-bottom: 0;
-`;
-
-const validatePesel = pesel => pesel.split('').filter(char => !isNaN(+char)).length === 3;
+interface FormElements extends HTMLFormControlsCollection {
+	name: HTMLInputElement;
+	surname: HTMLInputElement;
+	pesel: HTMLInputElement;
+}
 
 const PersonalDetials = () => {
 	const { user, setUser, toggleLoading } = useContext(SystemContext);
-	const submitHandler = async event => {
+	const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const {
 			name: { value: nameValue },
 			surname: { value: surnameValue },
-			pesel: { value: peselValue }
-		} = event.target.elements;
+			pesel: { value: peselValue },
+		} = event.currentTarget.elements as FormElements;
 		if (!validatePesel(peselValue)) {
 			// TODO: toogle validation toast
 			return;
@@ -45,7 +41,7 @@ const PersonalDetials = () => {
 			const { data: userData } = await axios.put(UPDATE_USER(user.id), {
 				name: nameValue,
 				surname: surnameValue,
-				pesel: peselValue
+				pesel: peselValue,
 			});
 			setUser({ ...userData });
 		} catch (error) {
@@ -66,7 +62,7 @@ const PersonalDetials = () => {
 				need to type 3 random digits from yout PESEL number to make sure about your idetify.
 			</SystemStyledTypography>
 			<Box component={'form'} width="100%" onSubmit={submitHandler}>
-				<InputsContainer container spacing={4} component={Box} py={2} my={0}>
+				<Grid container spacing={4} component={Box} py={4}>
 					<Grid item xs={12} sm={6}>
 						<TextField fullWidth name="name" label="Name" />
 					</Grid>
@@ -76,7 +72,7 @@ const PersonalDetials = () => {
 					<Grid item xs={12} sm={6}>
 						<PeselInput />
 					</Grid>
-				</InputsContainer>
+				</Grid>
 				<Box display="flex" justifyContent="flex-start" flexWrap="nowrap" my={2}>
 					<Button disabled={false} type="submit" variant="contained" color="primary" endIcon={<ArrowForwardIcon />}>
 						Next
