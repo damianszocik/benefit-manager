@@ -11,15 +11,15 @@ const LoaderContainer = styled.div`
     top: 0;
     left: 0;
 	background: rgba(255, 255, 255, .8);
-	z-index: ${props => props.theme.zIndex.modal + 1};
+	z-index: ${(props) => props.theme.zIndex.modal + 1};
 `;
 
-const Loader = ({ show = false }) => {
+const Loader: React.FC<{ show: boolean }> = ({ show = false }) => {
 	const lottieOptions = {
 		animationData: LoaderAnimation,
 		rendererSettings: {
-			preserveAspectRatio: 'xMidYMid meet'
-		}
+			preserveAspectRatio: 'xMidYMid meet',
+		},
 	};
 	if (show) {
 		return (

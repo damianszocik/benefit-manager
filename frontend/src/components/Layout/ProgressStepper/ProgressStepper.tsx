@@ -3,6 +3,16 @@ import styled from 'styled-components';
 import { Stepper, Step, StepLabel } from '@material-ui/core';
 import { EmojiPeople as PeopleIcon, Fingerprint as FingerprintIcon, CardGiftcard as GiftcardIcon, Send as SendIcon } from '@material-ui/icons';
 
+interface ProgressStepperProps {
+	step: number;
+	small?: boolean;
+}
+
+interface StyledStepIconProps extends ProgressStepperProps {
+	active: boolean;
+	completed: boolean;
+}
+
 const StyledStepper = styled(Stepper)`
 	align-items: center;
 	.MuiStepLabel-iconContainer {
@@ -14,7 +24,7 @@ const StyledStepper = styled(Stepper)`
 	}
 `;
 
-const StepConnector = styled.div`
+const StepConnector = styled.div<{ small?: boolean }>`
 	height: ${({ theme, small }) => (small ? theme.spacing(6) : theme.spacing(12))}px;
 	width: 3px;
 	background: ${({ theme }) => theme.palette.primary.main};
@@ -23,7 +33,7 @@ const StepConnector = styled.div`
 	}
 `;
 
-const StyledStepIcon = styled.div`
+const StyledStepIcon = styled.div<StyledStepIconProps>`
 	border-radius: 50%;
 	width: ${({ theme, active, small }) => (active ? theme.spacing(small ? 7 : 8) : theme.spacing(small ? 4 : 5))}px;
 	height: ${({ theme, active, small }) => (active ? theme.spacing(small ? 7 : 8) : theme.spacing(small ? 4 : 5))}px;
@@ -37,20 +47,20 @@ const StyledStepIcon = styled.div`
 	}
 `;
 
-const icons = {
-	1: <PeopleIcon />,
-	2: <FingerprintIcon />,
-	3: <GiftcardIcon />,
-	4: <SendIcon />
+const icons: { [key: string]: JSX.Element } = {
+	'1': <PeopleIcon />,
+	'2': <FingerprintIcon />,
+	'3': <GiftcardIcon />,
+	'4': <SendIcon />,
 };
 
-const ProgressStepper = ({ step = 0, small }) => {
+const ProgressStepper: React.FC<ProgressStepperProps> = ({ step = 0, small }) => {
 	return (
 		<StyledStepper activeStep={step} orientation="vertical" connector={<StepConnector small={small} />}>
-			{Object.keys(icons).map(iconKey => (
+			{Object.keys(icons).map((iconKey) => (
 				<Step key={iconKey}>
 					<StepLabel
-						StepIconComponent={props => (
+						StepIconComponent={(props) => (
 							<StyledStepIcon {...props} small={small}>
 								{icons[iconKey]}
 							</StyledStepIcon>

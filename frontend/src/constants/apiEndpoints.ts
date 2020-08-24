@@ -4,4 +4,4 @@ export const REGISTER_USER = '/auth/local/register',
 	RESET_PASSWORD = '/auth/reset-password',
 	CURRENT_USER = '/users/me',
 	BENEFITS = '/benefits',
-	UPDATE_USER = id => `/users/${id}`;
+	UPDATE_USER = (id: number): string => `/users/${id}`;

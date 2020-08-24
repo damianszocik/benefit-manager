@@ -1,4 +1,8 @@
-const parseResponseError = error => {
+interface parseResponseErrorProps {
+	(error: any): string;
+}
+
+const parseResponseError: parseResponseErrorProps = (error) => {
 	let errorMessage;
 	try {
 		const parsedResponse = JSON.parse(error.request.response);

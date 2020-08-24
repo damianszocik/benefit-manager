@@ -6,15 +6,22 @@ import HelpSection from '../HelpSection/HelpSection';
 import UserInfoSection from '../UserInfoSection/UserInfoSection';
 import MenuButton from './MenuButton';
 
-const TopbarContainer = styled(Container)`
+interface ThemeProps {
+	mobileView?: string;
+	theme: {
+		spacing: (space: number) => number;
+	};
+}
+
+const TopbarContainer = styled(Container)<ThemeProps>`
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	> h1:first-child {
-		margin-right: ${props => (props.mobileView ? 'initial' : props.theme.spacing(8) + 'px')};
+		margin-right: ${(props) => (props.mobileView ? 'initial' : props.theme.spacing(8) + 'px')};
 	}
 	> div:first-of-type {
-		margin-right: ${props => (props.mobileView ? 'initial' : 'auto')};
+		margin-right: ${(props) => (props.mobileView ? 'initial' : 'auto')};
 	}
 `;
 

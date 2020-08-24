@@ -2,36 +2,39 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Typography, Button, Box, Grid, TextField } from '@material-ui/core';
+import { Button, Box, BoxProps, Grid, GridTypeMap, TextField } from '@material-ui/core';
 import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
-import { spacing } from '@material-ui/system';
 import { SystemContext } from 'contexts/System';
 import { RESET_PASSWORD } from 'constants/apiEndpoints';
 import parseResponseError from 'utils/parseResponseError';
+import { SystemStyledTypography } from 'components/shared/SystemStyledTypography/SystemStyledTypography';
 
-const SystemStyledTypography = styled(Typography)`
-	${spacing}
-`;
+type InputsContainer = GridTypeMap & BoxProps;
 
-const InputsContainer = styled(Grid)`
+const InputsContainer = styled(Grid)<Partial<InputsContainer>>`
 	margin-top: 0;
 	margin-bottom: 0;
 `;
+
+interface FormElements extends HTMLFormControlsCollection {
+	password: HTMLInputElement;
+	repeatPassword: HTMLInputElement;
+}
 
 const ResetPassword = () => {
 	const browserHistory = useHistory();
 	const {
 		setCurrentStep,
 		setUser,
-		globalToast: { toggleToast }
+		globalToast: { toggleToast },
 	} = useContext(SystemContext);
 	const query = new URLSearchParams(useLocation().search);
-	const submitHandler = async event => {
+	const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const {
 				password: { value: passwordValue },
-				repeatPassword: { value: repeatPasswordValue }
-			} = event.target.elements,
+				repeatPassword: { value: repeatPasswordValue },
+			} = event.currentTarget.elements as FormElements,
 			code = query.get('code');
 		if (passwordValue !== repeatPasswordValue) {
 			toggleToast(true, "Your password and repeated password don't match", 'warning');
@@ -42,11 +45,11 @@ const ResetPassword = () => {
 		}
 		try {
 			const {
-				data: { jwt, user }
+				data: { jwt, user },
 			} = await axios.post(RESET_PASSWORD, {
 				code,
 				password: passwordValue,
-				passwordConfirmation: repeatPasswordValue
+				passwordConfirmation: repeatPasswordValue,
 			});
 			if (!jwt) {
 				throw new Error();
@@ -61,7 +64,7 @@ const ResetPassword = () => {
 				setUser({ ...user, jwt });
 				browserHistory.push({
 					pathname: '/',
-					state: { toast: { message: 'Your password have been changed. You have been logged in.', type: 'success' } }
+					state: { toast: { message: 'Your password have been changed. You have been logged in.', type: 'success' } },
 				});
 			}
 		} catch (error) {

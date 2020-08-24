@@ -1,7 +1,11 @@
 import React from 'react';
 import { Grid, Typography, TextField, Box } from '@material-ui/core';
 
-const PasswordForgot = ({ emailChangeHandler }) => {
+interface PasswordForgotProps {
+	emailChangeHandler: (email: string) => void;
+}
+
+const PasswordForgot: React.FC<PasswordForgotProps> = ({ emailChangeHandler }) => {
 	return (
 		<Grid container>
 			<Grid item xs={12}>
@@ -11,7 +15,7 @@ const PasswordForgot = ({ emailChangeHandler }) => {
 				</Typography>
 			</Grid>
 			<Grid item xs={12} component={Box} py={2}>
-				<TextField type="email" id="email" label="Email" onChange={event => emailChangeHandler(event.target.value)} fullWidth />
+				<TextField type="email" id="email" label="Email" onChange={(event) => emailChangeHandler(event.target.value)} fullWidth />
 			</Grid>
 		</Grid>
 	);

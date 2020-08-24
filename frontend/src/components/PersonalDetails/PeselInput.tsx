@@ -10,7 +10,7 @@ const StyledInput = styled(Input)`
 `;
 
 const generateMap = () => {
-	const map = ['•', '•', '•', '•', '•', '•', '•', '•', '•', '•', '•'];
+	const map: Array<string | RegExp> = ['•', '•', '•', '•', '•', '•', '•', '•', '•', '•', '•'];
 	let numberCounter = 0;
 	while (numberCounter < 3) {
 		const proposalIndex = Math.floor(Math.random() * 12);
@@ -22,14 +22,14 @@ const generateMap = () => {
 	return map;
 };
 
-const TextMaskCustom = props => {
+const TextMaskCustom: React.ElementType<{ inputRef: (instance: MaskedInput | HTMLElement | null) => void }> = (props) => {
 	const [inputMap] = React.useState(generateMap());
 	const { inputRef, ...other } = props;
 
 	return (
 		<MaskedInput
 			{...other}
-			ref={ref => {
+			ref={(ref) => {
 				inputRef(ref ? ref.inputElement : null);
 			}}
 			mask={inputMap}
@@ -39,11 +39,11 @@ const TextMaskCustom = props => {
 	);
 };
 
-const PeselInput = ({}) => {
+const PeselInput: React.FC<{}> = () => {
 	return (
 		<FormControl fullWidth>
 			<InputLabel htmlFor="pesel">PESEL</InputLabel>
-			<StyledInput name="pesel" inputComponent={TextMaskCustom} />
+			<StyledInput name="pesel" inputComponent={TextMaskCustom as any} />
 		</FormControl>
 	);
 };
