@@ -3,7 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { CURRENT_USER } from 'constants/apiEndpoints';
 import { SystemContext } from 'contexts/System';
-import Toast from 'components/shared/Toast/Toast';
+import Toast, { ToastObject } from 'components/shared/Toast/Toast';
 import Layout from './Layout/Layout';
 import SignUp from './SignUp/SignUp';
 import PersonalDetails from './PersonalDetails/PersonalDetails';
@@ -29,7 +29,7 @@ const App = () => {
 		globalToast: { toastProperties, toggleToast },
 	} = useContext(SystemContext);
 	const { location, replace: replaceHistory } = useHistory();
-	const renderStepComponent = (currentStep) => {
+	const renderStepComponent = (currentStep: number) => {
 		switch (currentStep) {
 			case 1:
 				return <PersonalDetails />;
@@ -41,7 +41,7 @@ const App = () => {
 				return <SignUp />;
 		}
 	};
-	const updateUser = async (jwt) => {
+	const updateUser = async (jwt: string) => {
 		toggleLoading(true);
 		axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;
 		try {
@@ -61,7 +61,7 @@ const App = () => {
 		toggleLoading(false);
 	};
 	useEffect(() => {
-		if (user.jwt) {
+		if ('jwt' in user) {
 			updateUser(user.jwt);
 		}
 	}, []);
@@ -69,8 +69,8 @@ const App = () => {
 		if (checkConfirmedUser()) {
 			toggleToast(true, 'Your account has been confirmed. You can now login.', 'success');
 		}
-		if (location.state && location.state.toast) {
-			const { toast, ...cleanedLocationState } = location.state;
+		if (location.state && 'toast' in location.state) {
+			const { toast, ...cleanedLocationState }: { toast: ToastObject; cleanedLocationState: {} } = location.state;
 			toggleToast(true, toast.message, toast.type);
 			replaceHistory({ ...location, state: { ...cleanedLocationState } });
 		}
@@ -87,7 +87,7 @@ const App = () => {
 				visibility={toastProperties.visibility}
 				message={toastProperties.message}
 				type={toastProperties.type}
-				closeHandler={() => toggleToast(false)}
+				closeHandler={() => toggleToast(false, '', 'success')}
 			/>
 		</Layout>
 	);
