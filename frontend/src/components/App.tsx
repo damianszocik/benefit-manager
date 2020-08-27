@@ -9,7 +9,6 @@ import SignUp from './SignUp/SignUp';
 import PersonalDetails from './PersonalDetails/PersonalDetails';
 import BenefitsSelection from './BenefitsSelection/BenefitsSelection';
 import ResetPassword from './ResetPassword/ResetPassword';
-import { Color } from '@material-ui/lab/Alert';
 
 const environmentApiBaseUrl = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PROD_API_URL : process.env.REACT_APP_DEV_API_URL;
 axios.defaults.baseURL = environmentApiBaseUrl;
