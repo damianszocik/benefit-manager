@@ -38,12 +38,16 @@ const PersonalDetials = () => {
 		}
 		toggleLoading(true);
 		try {
-			const { data: userData } = await axios.put(UPDATE_USER(user.id), {
-				name: nameValue,
-				surname: surnameValue,
-				pesel: peselValue,
-			});
-			setUser({ ...userData });
+			if ('id' in user) {
+				const { data: userData } = await axios.put(UPDATE_USER(user.id), {
+					name: nameValue,
+					surname: surnameValue,
+					pesel: peselValue,
+				});
+				setUser({ ...userData });
+			} else {
+				throw 'Invalid user id';
+			}
 		} catch (error) {
 			// TODO: toggle error toast
 		}
