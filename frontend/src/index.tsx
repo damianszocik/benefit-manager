@@ -9,7 +9,7 @@ import GlobalStyle from 'components/styles/Global';
 import App from 'components/App';
 import * as serviceWorker from './serviceWorker';
 
-const RootComponent = () => (
+const RootComponent: React.FC<{}> = () => (
 	<StylesProvider injectFirst>
 		<ThemeProvider theme={appTheme}>
 			<StyledComponentsThemeProvider theme={appTheme}>
