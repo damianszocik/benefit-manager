@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { Snackbar, Slide, SlideProps } from '@material-ui/core';
 import Alert, { Color } from '@material-ui/lab/Alert';
 
-export interface ToastObject {
+interface ToastObject {
 	visibility?: boolean;
 	message: string;
 	type: Color;
 }
 
-export interface ToastFn<returnedType> {
+interface ToastFn<returnedType> {
 	(visibility: boolean, message: string, type: Color): returnedType;
 }
 
-export interface UseToastReturnType {
+interface UseToastReturnType {
 	toastProperties: ToastObject;
 	toggleToast: ToastFn<void>;
 }
@@ -21,7 +21,7 @@ interface Toast extends ToastObject {
 	closeHandler: (event: React.SyntheticEvent<Element, Event>) => void;
 }
 
-export const useToast: ToastFn<UseToastReturnType> = (visibility, message, type = 'success') => {
+export const useToast: ToastFn<UseToastReturnType> = (visibility = false, message, type = 'success') => {
 	const [toastProperties, setToastProperties] = useState<ToastObject>({
 		visibility: false,
 		message,
