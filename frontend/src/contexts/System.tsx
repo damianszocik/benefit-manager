@@ -51,6 +51,8 @@ interface SystemContext {
 	toggleLoading: (newLoadingState: boolean) => void;
 	loading: boolean;
 	globalToast: UseToastReturnType;
+	lockLayoutScrolling: boolean;
+	setLockLayoutScrolling: (layotScrolling: boolean) => void;
 }
 
 const initialContext: SystemContext = {
@@ -65,6 +67,8 @@ const initialContext: SystemContext = {
 	toggleLoading: () => {},
 	loading: false,
 	globalToast: { toastProperties: {} as ToastObject, toggleToast: {} as ToastFn<void> },
+	lockLayoutScrolling: false,
+	setLockLayoutScrolling: () => {},
 };
 
 export const SystemContext = createContext<SystemContext>(initialContext);
@@ -76,6 +80,7 @@ const SystemContextProvider: React.FC<{}> = ({ children }) => {
 	const [mobileView, setMobileView] = useState(initialContext.mobileView);
 	const [loading, toggleLoading] = useState(initialContext.loading);
 	const [drawerVisibility, setDrawerVisibility] = useState(initialContext.drawerVisibility);
+	const [lockLayoutScrolling, setLockLayoutScrolling] = useState(false);
 	const globalToast = useToast(false, '', 'success');
 
 	const setUser: SetUser = (userData) => {
@@ -146,6 +151,8 @@ const SystemContextProvider: React.FC<{}> = ({ children }) => {
 				toggleLoading,
 				loading,
 				globalToast,
+				lockLayoutScrolling,
+				setLockLayoutScrolling,
 			}}>
 			{children}
 		</SystemContext.Provider>
