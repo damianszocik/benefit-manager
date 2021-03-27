@@ -1242,6 +1242,12 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
@@ -1254,38 +1260,35 @@
           "pesel": {
             "type": "string"
           },
-          "benefits": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "points"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "users": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "points": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "avilablePoints": {
+          "availablePoints": {
             "type": "integer",
             "default": 10
+          },
+          "benefits": {
+            "required": [
+              "id",
+              "points"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "points": {
+                "type": "integer"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1308,6 +1311,7 @@
           },
           "password": {
             "type": "string",
+            "format": "password",
             "minLength": 6
           },
           "resetPasswordToken": {
@@ -1333,15 +1337,18 @@
           "pesel": {
             "type": "string"
           },
-          "benefits": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "avilablePoints": {
+          "availablePoints": {
             "type": "integer",
             "default": 10
+          },
+          "benefits": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       }

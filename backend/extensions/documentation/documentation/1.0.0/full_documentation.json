@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/07/2020 9:22:52 PM"
+    "x-generation-date": "03/27/2021 10:18:26 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -45,6 +45,74 @@
     }
   ],
   "paths": {
+    "/benefits/user/{userId}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Benefit"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/benefits": {
       "get": {
         "deprecated": false,
@@ -1012,63 +1080,6 @@
             }
           }
         ]
-      }
-    },
-    "/users-permissions/init": {
-      "get": {
-        "deprecated": false,
-        "description": "Check if the first admin user has already been registered",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - Role"
-        ],
-        "parameters": []
       }
     },
     "/users-permissions/roles/{id}": {
@@ -2729,63 +2740,6 @@
           "description": {
             "type": "string"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "username",
-                "email"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "username": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "resetPasswordToken": {
-                  "type": "string"
-                },
-                "confirmed": {
-                  "type": "boolean"
-                },
-                "blocked": {
-                  "type": "boolean"
-                },
-                "role": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "surname": {
-                  "type": "string"
-                },
-                "pesel": {
-                  "type": "string"
-                },
-                "benefits": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "avilablePoints": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
           "points": {
             "type": "integer"
           }
@@ -2802,14 +2756,14 @@
           "description": {
             "type": "string"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "points": {
             "type": "integer"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -2863,6 +2817,12 @@
                 },
                 "role": {
                   "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
                 }
               }
             }
@@ -2912,14 +2872,17 @@
                 "pesel": {
                   "type": "string"
                 },
-                "benefits": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "avilablePoints": {
+                "availablePoints": {
                   "type": "integer"
+                },
+                "benefits": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
                 }
               }
             }
@@ -2952,6 +2915,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },
@@ -3013,6 +2982,12 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
@@ -3025,38 +3000,35 @@
           "pesel": {
             "type": "string"
           },
-          "benefits": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "points"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "users": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "points": {
-                  "type": "integer"
-                }
-              }
-            }
-          },
-          "avilablePoints": {
+          "availablePoints": {
             "type": "integer",
             "default": 10
+          },
+          "benefits": {
+            "required": [
+              "id",
+              "points"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "points": {
+                "type": "integer"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -3079,6 +3051,7 @@
           },
           "password": {
             "type": "string",
+            "format": "password",
             "minLength": 6
           },
           "resetPasswordToken": {
@@ -3104,15 +3077,18 @@
           "pesel": {
             "type": "string"
           },
-          "benefits": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "avilablePoints": {
+          "availablePoints": {
             "type": "integer",
             "default": 10
+          },
+          "benefits": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       },

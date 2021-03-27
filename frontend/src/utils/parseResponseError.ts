@@ -1,14 +1,14 @@
-interface parseResponseErrorProps {
-	(error: any): string;
-}
+type parseResponseErrorProps = (error: any, fallbackErrorMessage?: string) => string;
 
-const parseResponseError: parseResponseErrorProps = (error) => {
+const DEFAULT_ERROR_MESSAGE = 'Something went wrong';
+
+const parseResponseError: parseResponseErrorProps = (error, fallbackErrorMessage = DEFAULT_ERROR_MESSAGE) => {
 	let errorMessage;
 	try {
 		const parsedResponse = JSON.parse(error.request.response);
-		errorMessage = parsedResponse.message[0].messages[0].message;
+		errorMessage = parsedResponse?.message[0]?.messages[0]?.message || fallbackErrorMessage;
 	} catch (error) {
-		errorMessage = 'Something went wrong';
+		errorMessage = DEFAULT_ERROR_MESSAGE;
 	}
 	return errorMessage;
 };
