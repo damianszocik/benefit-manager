@@ -2,6 +2,14 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/benefits/user/:userId",
+      "handler": "benefit.findUsersBenefits",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/benefits",
       "handler": "benefit.find",
       "config": {

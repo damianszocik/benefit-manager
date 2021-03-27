@@ -5,4 +5,17 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+    findUsersBenefits: async (ctx) => {
+        const user = ctx.state.user;
+
+        if (!user) {
+          return ctx.badRequest(null, [{ messages: [{ id: 'No authorization header was found' }] }]);
+        }
+    
+        const { id } = user;
+        const data = await strapi.plugins['users-permissions'].services.user.fetch({ id });
+    
+        ctx.body = data.benefits;
+      },
+};

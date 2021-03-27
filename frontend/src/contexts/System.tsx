@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import isMobile from 'ismobilejs';
 import axios from 'axios';
 import { MOBILE_BREAKPOINT } from 'constants/system';
@@ -17,7 +17,7 @@ interface Benefit {
 	name: string;
 }
 
-interface User {
+export interface User {
 	id: number;
 	username: string;
 	email: string;
@@ -28,7 +28,7 @@ interface User {
 	name: string;
 	surname: string;
 	pesel: string;
-	avilablePoints: number;
+	availablePoints: number;
 	created_at: string;
 	updated_at: string;
 	benefits: Benefit[];
@@ -160,3 +160,5 @@ const SystemContextProvider: React.FC<{}> = ({ children }) => {
 };
 
 export default SystemContextProvider;
+
+export const useSystemContext = () => useContext(SystemContext);
